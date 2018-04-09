@@ -1,0 +1,15 @@
+en:
+  actors:
+    index:
+      devices: Devices
+      groups: Groups
+    list:
+      change: Change
+      hkr_temp_is: Is Temperature
+      hkr_temp_set: Set Temperature
+      in: in
+      name: Name
+      next_change: Next Change
+      to: to
+    update:
+      success: Success
