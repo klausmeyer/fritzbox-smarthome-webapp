@@ -54,3 +54,9 @@ end
 
 gem 'bootstrap', '~> 4.0.0'
 gem 'fritzbox-smarthome', github: 'klausmeyer/fritzbox-smarthome'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.7'
+  gem 'webmock'
+  gem 'capybara', '~> 3.0'
+end
