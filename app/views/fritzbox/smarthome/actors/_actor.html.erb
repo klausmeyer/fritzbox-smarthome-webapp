@@ -1,0 +1,29 @@
+<tr>
+  <% if actor.type == :device %>
+    <td><%= actor.name %></td>
+    <td><%= temperature_format actor.hkr_temp_is %></td>
+  <% else %>
+    <td colspan="2">
+      <%= t('.group_switch') %>
+    </td>
+  <% end %>
+  <td>
+    <%= form_with url: actor_path(id: actor.ain), method: :put, class: 'form-inline' do |f| %>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">°C</span>
+        </div>
+        <%= number_field_tag :hkr_temp_set, actor.hkr_temp_set, step: 0.5, class: 'form-control' %>
+        <div class="input-group-append">
+          <%= f.submit t('.change'), class: 'btn btn-outline-secondary' %>
+        </div>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <% unless local_assigns.dig(:locals, :group) %>
+      <%= t('.to') %> <%= temperature_format actor.hkr_next_change_temp %>
+      <%= t('.in') %> <%= distance_of_time_in_words Time.now.utc, actor.hkr_next_change_period %>
+    <% end %>
+  </td>
+</tr>

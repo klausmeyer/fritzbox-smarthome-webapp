@@ -1,15 +1,20 @@
 en:
+  fritzbox:
+    smarthome:
+      actors:
+        actor:
+          change: Change
+          group_switch: Group Switch
+          in: in
+          to: to
   actors:
     index:
-      devices: Devices
-      groups: Groups
+      group: 'Group "%{name}":'
+      devices_not_in_groups: 'Not in any group:'
     list:
-      change: Change
-      hkr_temp_is: Is Temperature
-      hkr_temp_set: Set Temperature
-      in: in
       name: Name
-      next_change: Next Change
-      to: to
+      next_change: Scheduled Change
+      hkr_temp_is: Current Temp.
+      hkr_temp_set: Desired Temp.
     update:
       success: Success

@@ -1,7 +1,9 @@
 class ActorsController < ApplicationController
   def index
-    @groups  = Fritzbox::Smarthome::Actor.all(types: ['group']).sort_by(&:name)
-    @devices = Fritzbox::Smarthome::Actor.all(types: ['device']).sort_by(&:name)
+    @all_actors = Fritzbox::Smarthome::Actor.all
+    @groups  = @all_actors.select { |a| a.type == :group }
+    @devices = @all_actors.select { |a| a.type == :device }
+    @devices_not_in_groups = @devices.reject { |a| a.id.in? @groups.map(&:group_members).flatten }
   end
 
   def update

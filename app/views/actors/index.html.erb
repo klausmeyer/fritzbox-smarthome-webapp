@@ -1,7 +1,8 @@
-<p><%= t('.groups') %></p>
-<%= render partial: 'list', locals: { actors: @groups } %>
+<% @groups.each do |group| %>
+  <p><strong><%= t('.group', name: group.name) %></strong></p>
+  <%= render partial: 'list', locals: { group: group, actors: @devices.select { |a| a.id.in? group.group_members } } %>
+  <hr />
+<% end %>
 
-<hr>
-
-<p><%= t('.devices') %></p>
-<%= render partial: 'list', locals: { actors: @devices } %>
+<p><strong><%= t('.devices_not_in_groups') %></strong></p>
+<%= render partial: 'list', locals: { actors: @devices_not_in_groups } %>

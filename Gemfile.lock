@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/klausmeyer/fritzbox-smarthome.git
-  revision: 00b1a4167506d58b40c2d291c7ad24754b4d505c
+  revision: 005a564e5c7a81de37bafe330de6c9d42f18719c
   specs:
     fritzbox-smarthome (0.1.0)
       activemodel (~> 5.1)
