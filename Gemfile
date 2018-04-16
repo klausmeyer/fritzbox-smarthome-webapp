@@ -52,7 +52,7 @@ end
 
 # custom
 
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.1.0'
 gem 'fritzbox-smarthome', github: 'klausmeyer/fritzbox-smarthome'
 
 group :development, :test do
