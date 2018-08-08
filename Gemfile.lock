@@ -213,10 +213,10 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.0)
   byebug
-  capybara (~> 3.0)
+  capybara (>= 2.15)
   fritzbox-smarthome!
   puma (~> 3.11)
-  rails (~> 5.2.0)
+  rails (~> 5.2.1)
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)
   spring
