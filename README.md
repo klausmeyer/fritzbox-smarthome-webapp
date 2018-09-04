@@ -2,6 +2,8 @@
 
 This WebApp uses the [fritzbox-smarthome](https://github.com/klausmeyer/fritzbox-smarthome) ruby gem to interface with the Smarthome Features of a FritzBox.
 
+[![Screenshot](docs/screenshot_thumb.png)](https://github.com/klausmeyer/fritzbox-smarthome-webapp/raw/master/docs/screenshot.png)
+
 ## Usage
 
 Check `config/initializers/fritzbox-smarthome.rb` for required configuration.
