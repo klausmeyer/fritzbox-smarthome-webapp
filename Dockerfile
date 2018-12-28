@@ -1,4 +1,4 @@
-FROM ruby:2.5.3-alpine
+FROM ruby:2.6.0-alpine
 
 MAINTAINER Klaus Meyer <spam@klaus-meyer.net>
 
@@ -28,7 +28,7 @@ RUN adduser -S -h /app app && chown -R app /app && chown -R app /usr/local/bundl
 
 USER app
 
-RUN rake assets:precompile && \
+RUN bundle exec rake assets:precompile && \
     rm -rf /usr/lib/lib/ruby/gems/*/cache/*
 
 CMD puma -C config/puma.rb
