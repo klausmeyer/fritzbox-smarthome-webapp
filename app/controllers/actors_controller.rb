@@ -8,7 +8,6 @@ class ActorsController < ApplicationController
 
   def update
     actor.update_hkr_temp_set BigDecimal.new(params.fetch(:hkr_temp_set))
-    flash[:success] = t('.success')
 
     redirect_to action: :index
   end

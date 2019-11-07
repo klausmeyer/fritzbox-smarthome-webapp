@@ -8,22 +8,22 @@
     </td>
   <% end %>
   <td>
-    <%= form_with url: actor_path(id: actor.ain), method: :put, class: 'form-inline' do |f| %>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">°C</span>
-        </div>
-        <%= number_field_tag :hkr_temp_set, actor.hkr_temp_set, step: 0.5, class: 'form-control' %>
-        <div class="input-group-append">
-          <%= f.submit t('.change'), class: 'btn btn-outline-success' %>
-        </div>
-      </div>
+    <% if actor.hkr_temp_set == Fritzbox::Smarthome::TEMP_VALUE_OFF %>
+      <%= link_to "ON", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_is), method: :put %>
+    <% else %>
+      <%= link_to "↓", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_set - 0.5), method: :put %>
+      &nbsp;&nbsp;
+      <%= actor.hkr_temp_set %> °C
+      &nbsp;&nbsp;
+      <%= link_to "↑", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_set + 0.5), method: :put %>
+      &nbsp;&nbsp;
+      <%= link_to "OFF", actor_path(id: actor.ain, hkr_temp_set: Fritzbox::Smarthome::TEMP_VALUE_OFF), method: :put %>
     <% end %>
   </td>
   <td>
-    <% unless local_assigns.dig(:locals, :group) %>
+    <%= content_tag :span, title: actor.hkr_next_change_period do %>
       <%= t('.to') %> <%= temperature_format actor.hkr_next_change_temp %>
       <%= t('.in') %> <%= distance_of_time_in_words Time.now.utc, actor.hkr_next_change_period %>
-    <% end %>
+    <% end unless local_assigns.dig(:locals, :group) %>
   </td>
 </tr>
