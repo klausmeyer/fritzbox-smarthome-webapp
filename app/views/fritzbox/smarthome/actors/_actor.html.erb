@@ -9,15 +9,15 @@
   <% end %>
   <td>
     <% if actor.hkr_temp_set == Fritzbox::Smarthome::TEMP_VALUE_OFF %>
-      <%= link_to "ON", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_is), method: :put %>
+      <%= switch_actor_on_link actor %>
     <% else %>
-      <%= link_to "↓", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_set - 0.5), method: :put %>
+      <%= dec_temperature_link actor %>
       &nbsp;&nbsp;
-      <%= actor.hkr_temp_set %> °C
+      <%= temperature_format actor.hkr_temp_set %>
       &nbsp;&nbsp;
-      <%= link_to "↑", actor_path(id: actor.ain, hkr_temp_set: actor.hkr_temp_set + 0.5), method: :put %>
+      <%= inc_temperature_link actor %>
       &nbsp;&nbsp;
-      <%= link_to "OFF", actor_path(id: actor.ain, hkr_temp_set: Fritzbox::Smarthome::TEMP_VALUE_OFF), method: :put %>
+      <%= switch_actor_off_link actor %>
     <% end %>
   </td>
   <td>

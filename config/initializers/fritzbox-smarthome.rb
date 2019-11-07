@@ -8,4 +8,5 @@ end
 
 module Fritzbox::Smarthome
   TEMP_VALUE_OFF = 126.5 # This value indicates "OFF" state. 253/2
+  TEMP_VALUE_ON  = 16.0
 end
