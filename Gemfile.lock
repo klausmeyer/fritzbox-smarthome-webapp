@@ -239,7 +239,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   fritzbox-smarthome (~> 0.1.1)
   puma (~> 4.1)
-  rails (~> 6.0.1)
+  rails (~> 6.0.2)
   rspec-rails (~> 3.8)
   sass-rails (>= 6)
   spring
