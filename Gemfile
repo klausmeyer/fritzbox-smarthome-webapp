@@ -58,6 +58,6 @@ gem 'bootstrap', '~> 4.4.1'
 gem 'fritzbox-smarthome', '~> 0.1.1'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 4.0'
   gem 'webmock'
 end
