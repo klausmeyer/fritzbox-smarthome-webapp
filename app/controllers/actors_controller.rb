@@ -7,7 +7,7 @@ class ActorsController < ApplicationController
   end
 
   def update
-    actor.update_hkr_temp_set BigDecimal.new(params.fetch(:hkr_temp_set))
+    actor.update_hkr_temp_set BigDecimal(params.fetch(:hkr_temp_set))
 
     redirect_to action: :index
   end

@@ -1,27 +1,18 @@
 module ActorsHelper
-  def switch_actor_off_link(actor)
-    change_temperature_link 'OFF',actor, Fritzbox::Smarthome::TEMP_VALUE_OFF
+  TEMP_MIN = 8.0
+  TEMP_MAX = 30.0
+
+  def temperature_select(actor)
+    select_tag :hkr_temp_set, options_for_select(temperature_options, actor.hkr_temp_set.to_s), include_blank: false, data: { remote: true, method: :put, url: actor_path(id: actor.ain) }
   end
 
-  def switch_actor_on_link(actor)
-    value = if actor.hkr_temp_set > 0 && actor.hkr_temp_set < Fritzbox::Smarthome::TEMP_VALUE_OFF
-      actor.hkr_temp_set
-    else
-      Fritzbox::Smarthome::TEMP_VALUE_ON
+  def temperature_options
+    options = [['Off', Fritzbox::Smarthome::TEMP_VALUE_OFF.to_s]]
+
+    (TEMP_MIN..TEMP_MAX).step(0.5) do |n|
+      options << ["#{n} °C", n.to_s]
     end
 
-    change_temperature_link 'ON', actor, value
-  end
-
-  def dec_temperature_link(actor)
-    change_temperature_link '↓', actor, actor.hkr_temp_set - 0.5
-  end
-
-  def inc_temperature_link(actor)
-    change_temperature_link '↑', actor, actor.hkr_temp_set + 0.5
-  end
-
-  def change_temperature_link(text, actor, value)
-    link_to text, actor_path(id: actor.ain, hkr_temp_set: value), remote: true, method: :put, data: { 'disable-with': '...' }
+    options
   end
 end

@@ -8,17 +8,7 @@
     </td>
   <% end %>
   <td>
-    <% if actor.hkr_temp_set == Fritzbox::Smarthome::TEMP_VALUE_OFF %>
-      <%= switch_actor_on_link actor %>
-    <% else %>
-      <%= dec_temperature_link actor %>
-      &nbsp;&nbsp;
-      <%= temperature_format actor.hkr_temp_set %>
-      &nbsp;&nbsp;
-      <%= inc_temperature_link actor %>
-      &nbsp;&nbsp;
-      <%= switch_actor_off_link actor %>
-    <% end %>
+    <%= temperature_select actor %>
   </td>
   <td>
     <%= content_tag :span, title: actor.hkr_next_change_period do %>
