@@ -3,7 +3,9 @@ module ActorsHelper
   TEMP_MAX = 30.0
 
   def temperature_select(actor)
-    select_tag :hkr_temp_set, options_for_select(temperature_options, actor.hkr_temp_set.to_s), include_blank: false, data: { remote: true, method: :put, url: actor_path(id: actor.ain) }
+    select_tag(:hkr_temp_set, options_for_select(temperature_options, actor.hkr_temp_set.to_s),
+      include_blank: false, class: 'form-control', data: { remote: true, method: :put, url: actor_path(id: actor.ain) }
+    )
   end
 
   def temperature_options
