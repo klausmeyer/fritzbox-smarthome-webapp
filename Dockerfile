@@ -10,17 +10,18 @@ ENV RAILS_LOG_TO_STDOUT true
 
 EXPOSE 8080
 
-RUN   apk update \
-  &&  apk add build-base zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev git nodejs \
-  &&  rm -rf /var/cache/apk/*
+RUN apk update \
+ && apk add build-base zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev git nodejs yarn \
+ && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
 ADD Gemfile /app
 ADD Gemfile.lock /app
 
-RUN   gem install bundler \
-  &&  bundle install --without development test
+RUN gem install bundler -v $(tail -n1 Gemfile.lock | xargs) \
+ && bundle config set without 'development test' \
+ && bundle install
 
 ADD . /app
 
@@ -28,7 +29,7 @@ RUN adduser -S -h /app app && chown -R app /app && chown -R app /usr/local/bundl
 
 USER app
 
-RUN bundle exec rake assets:precompile && \
-    rm -rf /usr/lib/lib/ruby/gems/*/cache/*
+RUN bundle exec rake assets:precompile \
+ && rm -rf /usr/lib/lib/ruby/gems/*/cache/*
 
 CMD puma -C config/puma.rb
