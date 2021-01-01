@@ -1,0 +1,19 @@
+<tr>
+  <% if heater.type == :device %>
+    <td><%= heater.name %></td>
+    <td><%= temperature_format heater.hkr_temp_is %></td>
+  <% else %>
+    <td colspan="2">
+      <%= t('.group_switch') %>
+    </td>
+  <% end %>
+  <td>
+    <%= temperature_select heater %>
+  </td>
+  <td>
+    <%= content_tag :span, title: heater.hkr_next_change_period do %>
+      <%= t('.to') %> <%= temperature_format heater.hkr_next_change_temp %>
+      <%= t('.in') %> <%= distance_of_time_in_words Time.now.utc, heater.hkr_next_change_period %>
+    <% end unless local_assigns.dig(:locals, :group) %>
+  </td>
+</tr>

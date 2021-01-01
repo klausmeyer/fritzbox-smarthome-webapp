@@ -1,6 +1,6 @@
 class ActorsController < ApplicationController
   def index
-    @all_actors = Fritzbox::Smarthome::Actor.all
+    @all_actors = Fritzbox::Smarthome::Heater.all
     @groups  = @all_actors.select { |a| a.type == :group }
     @devices = @all_actors.select { |a| a.type == :device }
     @devices_not_in_groups = @devices.reject { |a| a.id.in? @groups.map(&:group_members).flatten }
@@ -15,6 +15,6 @@ class ActorsController < ApplicationController
   private
 
   def actor
-    @actor ||= Fritzbox::Smarthome::Actor.new(ain: params.fetch(:id))
+    @actor ||= Fritzbox::Smarthome::Heater.new(ain: params.fetch(:id))
   end
 end

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.feature 'List Actors' do
   before do
-    expect(Fritzbox::Smarthome::Actor).to receive(:all).and_return([group, device1, device2])
+    expect(Fritzbox::Smarthome::Heater).to receive(:all).and_return([group, device1, device2])
   end
 
   def build_actor(attributes = {})
-    Fritzbox::Smarthome::Actor.new({
+    Fritzbox::Smarthome::Heater.new({
       id:                     1,
       type:                   :device,
       name:                   'Device',

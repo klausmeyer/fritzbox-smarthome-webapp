@@ -1,8 +1,8 @@
 en:
   fritzbox:
     smarthome:
-      actors:
-        actor:
+      heaters:
+        heater:
           change: Change
           group_switch: Group Switch
           in: in
