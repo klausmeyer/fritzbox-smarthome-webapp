@@ -57,7 +57,7 @@ end
 # custom
 
 gem 'bootstrap', '~> 4.5.0'
-gem 'fritzbox-smarthome', '~> 0.1.2'
+gem 'fritzbox-smarthome', '~> 0.2.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0'
