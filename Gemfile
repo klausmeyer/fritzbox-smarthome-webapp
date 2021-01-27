@@ -56,7 +56,7 @@ end
 
 # custom
 
-gem 'bootstrap', '~> 4.5.0'
+gem 'bootstrap', '~> 4.6.0'
 gem 'fritzbox-smarthome', '~> 0.2.0'
 
 group :development, :test do
