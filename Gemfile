@@ -60,7 +60,7 @@ gem 'bootstrap', '~> 4.6.0'
 gem 'fritzbox-smarthome', '~> 0.2.0'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec-rails', '~> 5.0'
   gem 'webmock'
   gem 'rexml' # required by webmock via crack gem
 end
