@@ -11,7 +11,7 @@ ENV RAILS_LOG_TO_STDOUT true
 EXPOSE 8080
 
 RUN apk update \
- && apk add build-base zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev git nodejs yarn \
+ && apk add build-base zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev git nodejs yarn shared-mime-info \
  && rm -rf /var/cache/apk/*
 
 WORKDIR /app
