@@ -56,11 +56,13 @@ end
 
 # custom
 
-gem 'bootstrap', '~> 4.6.0'
 gem 'fritzbox-smarthome', '~> 0.5.0'
+gem 'bootstrap', '~> 5.2.2'
+gem 'jquery-rails', '~> 4.5.0'
 
 group :development, :test do
+  gem 'i18n-tasks'
+
   gem 'rspec-rails', '~> 6.0'
   gem 'webmock'
-  gem 'rexml' # required by webmock via crack gem
 end

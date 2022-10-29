@@ -1,19 +1,69 @@
-<tr>
-  <% if heater.type == :device %>
-    <td><%= heater.name %></td>
-    <td><%= temperature_format heater.hkr_temp_is %></td>
-  <% else %>
-    <td colspan="2">
-      <%= t('.group_switch') %>
-    </td>
-  <% end %>
-  <td>
-    <%= temperature_select heater %>
-  </td>
-  <td>
-    <%= content_tag :span, title: heater.hkr_next_change_period do %>
-      <%= t('.to') %> <%= temperature_format heater.hkr_next_change_temp %>
-      <%= t('.in') %> <%= distance_of_time_in_words Time.now.utc, heater.hkr_next_change_period %>
-    <% end unless local_assigns.dig(:locals, :group) %>
-  </td>
-</tr>
+<div class="col">
+  <div class="card h-100">
+    <div class="card-header d-flex">
+      <span class="mt-2">Heater</span>
+      <button class="btn stn-sm btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#<%= dom_id(heater, :manage) %>">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench" viewBox="0 0 16 16">
+          <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= heater.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= t(".measured") %>: <%= temperature_format heater.hkr_temp_is %></h6>
+
+      <p class="card-text"><%= t(".battery", value: number_to_percentage(heater.battery, precision: 0)) %></p>
+
+      <p class="d-flex mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+
+        <span class="ms-auto display-6">
+          <% if heater.hkr_temp_set == Fritzbox::Smarthome::TEMP_CELSIUS_OFF %>
+            <%= t(".off") %>
+          <% else %>
+            <%= temperature_format heater.hkr_temp_set %>
+          <% end %>
+        </span>
+      </p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">
+        <% if Time.now.utc < heater.hkr_next_change_period %>
+          <%= t(".next_change", to: temperature_format(heater.hkr_next_change_temp), in: distance_of_time_in_words(Time.now.utc, heater.hkr_next_change_period)) %>
+        <% else %>
+          <%= t(".no_change") %>
+        <% end %>
+      </small>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="<%= dom_id(heater, :manage) %>" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t(".modify_heater", name: heater.name) %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <%= form_with(model: heater, url: heater_path(id: heater.id), method: :patch) do |f| %>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="temperature"><%= t(".temperature") %></label>
+              <div class="col-sm-8">
+                <%= f.collection_select :hkr_temp_set, Fritzbox::Smarthome::TEMPERATURE_SCALE, :second, :first, {}, {class: "form-control"} %>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= t(".close") %></button>
+            <%= f.hidden_field :ain %>
+            <%= f.submit t(".apply"), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,13 @@
+<h2>All</h2>
+
+<div class="row row-cols-1 row-cols-md-4">
+  <%= render @actors %>
+</div>
+
 <% @groups.each do |group| %>
-  <p><strong><%= t('.group', name: group.name) %></strong></p>
-  <%= render partial: 'list', locals: { group: group, actors: @devices.select { |a| a.id.in? group.group_members } } %>
-  <hr />
+  <h2 class="mt-5"><%= group.name %></h2>
+  <div class="row row-cols-1 row-cols-md-4">
+    <%= render @actors.filter { |a| a.id.in? group.group_members } %>
+  </div>
 <% end %>
 
-<p><strong><%= t('.devices_not_in_groups') %></strong></p>
-<%= render partial: 'list', locals: { actors: @devices_not_in_groups } %>

@@ -25,9 +25,8 @@ RSpec.feature 'List Actors' do
   scenario 'Show a list of all Actors' do
     visit '/'
 
-    expect(page).to have_text 'Group "My Group"'
-    expect(page).to have_content 'Group Switch'
-    expect(page).to have_content '19.5 °C'
-    expect(page).to have_content '16.0 °C'
+    expect(page).to have_text 'Device 1'
+    expect(page).to have_text 'Device 2'
+    expect(page).to have_text 'My Group'
   end
 end

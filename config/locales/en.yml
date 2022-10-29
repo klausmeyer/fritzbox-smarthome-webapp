@@ -1,20 +1,15 @@
+---
 en:
   fritzbox:
     smarthome:
       heaters:
         heater:
-          change: Change
-          group_switch: Group Switch
-          in: in
-          to: to
-  actors:
-    index:
-      group: 'Group "%{name}":'
-      devices_not_in_groups: 'Not in any group:'
-    list:
-      name: Name
-      next_change: Scheduled Change
-      hkr_temp_is: Current Temp.
-      hkr_temp_set: Desired Temp.
-    update:
-      success: Success
+          apply: Apply
+          battery: 'Battery: %{value}'
+          close: Close
+          measured: Measured
+          modify_heater: Modify «%{name}»
+          next_change: Next change in %{in} to %{to}
+          no_change: No automatic change
+          'off': 'OFF'
+          temperature: Temperature

@@ -12,15 +12,7 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
-
-document.addEventListener('turbolinks:load', function() {
-  var selects = document.querySelectorAll('select');
-
-  selects.forEach(function(select) {
-    select.addEventListener('change', function() {
-      var wrapper = select.parentNode;
-      wrapper.innerHTML = '<div class="text-center"><div class="spinner-border"></div></div>';
-    });
-  })
-});
