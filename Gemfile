@@ -56,7 +56,7 @@ end
 
 # custom
 
-gem 'fritzbox-smarthome', '~> 0.5.0'
+gem 'fritzbox-smarthome', '~> 0.6.0'
 gem 'bootstrap', '~> 5.2.2'
 gem 'jquery-rails', '~> 4.5.0'
 
